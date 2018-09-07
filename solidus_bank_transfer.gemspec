@@ -3,6 +3,7 @@ $:.push File.expand_path('../lib', __FILE__)
 require 'solidus_bank_transfer/version'
 
 Gem::Specification.new do |s|
+  s.platform    = Gem::Platform::RUBY
   s.name        = 'solidus_bank_transfer'
   s.version     = SolidusBankTransfer::VERSION
   s.summary     = 'Solidus extension to create bank transfer payment method.'
@@ -13,8 +14,10 @@ Gem::Specification.new do |s|
   s.email     = 'okkiy.metta@gmail.com'
   s.homepage  = 'https://github.com/metzie'
 
-  s.files = Dir["{app,config,db,lib}/**/*", 'LICENSE', 'Rakefile', 'README.md']
+  s.files      = `git ls-files`.split("\n")
   s.test_files = Dir['test/**/*']
+  s.require_path = 'lib'
+  s.requirements << 'none'
 
   s.add_dependency 'solidus_core', '~> 2.6.0'
   s.add_dependency 'solidus_support', '~> 0.1'
