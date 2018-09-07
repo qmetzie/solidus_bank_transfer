@@ -1,6 +1,6 @@
 class CreateBanks < ActiveRecord::Migration[5.2]
   def change
-    create_table :banks do |t|
+    create_table :spree_banks do |t|
       t.string :name
       t.string :account_no
       t.boolean :active, default: true
