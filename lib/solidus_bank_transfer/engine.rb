@@ -1,6 +1,8 @@
 module SolidusBankTransfer
   class Engine < Rails::Engine
     require 'spree/core'
+    require 'jquery-ui-rails'
+
     isolate_namespace Spree
     engine_name 'solidus_bank_transfer'
 
