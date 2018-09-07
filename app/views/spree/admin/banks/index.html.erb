@@ -1,0 +1,55 @@
+<% admin_breadcrumb(t('spree.settings')) %>
+<% admin_breadcrumb(plural_resource_name(Spree::Bank)) %>
+
+<% content_for :page_actions do %>
+  <% if can?(:create, Spree::Zone) %>
+    <li>
+      <%= link_to t('spree.new_bank'), new_object_url, id: 'admin_new_bank_link', class: 'btn btn-primary' %>
+    </li>
+  <% end %>
+<% end %>
+
+<%= paginate @banks, theme: "solidus_admin" %>
+
+<% if @banks.present? %>
+  <table class="index" id='listing_banks' data-hook>
+    <thead>
+      <tr data-hook="banks_header">
+        <th><%= Spree.t(:bank_name) %></th>
+        <th><%= Spree.t(:account_no) %></th>
+        <th><%= Spree.t(:additional_details) %></th>
+        <th><%= Spree.t(:status) %></th>
+        <th class="actions" colspan="2"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @banks.each do |bank|%>
+        <tr id="<%= spree_dom_id bank %>" data-hook="banks_row">
+          <td><%= bank.name %></td>
+          <td><%= bank.account_no %></td>
+          <td><%= bank.additional_details %></td>
+          <td id='active-status-<%= bank.id %>'><%= bank_status(bank) %></td>
+          <td data-hook="admin_banks_index_row_status" id='toggle-status-<%= bank.id %>' class="actions actions-2 text-right">
+             <% action_class = bank.active ? "btn-danger" : "btn-success" %>
+             <% btn_class = 'btn ' + action_class + ' btn-sm' %>
+             <% status = bank.active ? "active" : "inactive" %>
+             <% bank_id = 'bank-' + bank[:id].to_s %>
+             <%= link_to_with_icon(action_text_to_toggle_bank_status(bank), action_to_toggle_bank_status(bank), toggle_activation_admin_bank_path(bank), {class: btn_class, id: bank_id, rel: status, remote: true, method: :put}) %>
+          </td>
+          <td class="actions">
+            <% if can?(:update, bank) %>
+              <%= link_to_edit bank %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% else %>
+  <div class="no-objects-found">
+    <%= render 'spree/admin/shared/no_objects_found',
+                 resource: Spree::Bank,
+                 new_resource_url: new_object_url %>
+  </div>
+<% end %>

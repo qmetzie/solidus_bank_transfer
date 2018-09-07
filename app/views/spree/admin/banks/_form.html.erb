@@ -1,0 +1,29 @@
+<div class="row js-banks-form">
+  <div class="col-10">
+    <div data-hook="admin_zone_form_fields">
+      <fieldset class="no-border-bottom">
+        <%= bank_form.field_container :name do %>
+          <%= bank_form.label :name %> <span class="required">*</span><br />
+          <%= bank_form.text_field :name, class: 'fullwidth' %>
+        <% end %>
+
+        <%= bank_form.field_container :account_no do %>
+          <%= bank_form.label :account_no %> <span class="required">*</span><br />
+          <%= bank_form.text_field :account_no, class: 'fullwidth' %>
+        <% end %>
+
+        <%= bank_form.field_container :additional_details do %>
+          <%= bank_form.label :additional_details %><br />
+          <%= bank_form.text_area :additional_details, rows: 10, class: 'fullwidth' %>
+        <% end %>
+
+        <%= bank_form.field_container :active, class: ['checkbox'] do %>
+          <%= bank_form.label :active do %>
+            <%= bank_form.check_box :active %>
+            <%= Spree.t(:active) %>
+          <% end %>
+        <% end %>
+      </fieldset>
+    </div>
+  </div>
+</div>
