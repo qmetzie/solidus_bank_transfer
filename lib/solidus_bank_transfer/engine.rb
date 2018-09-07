@@ -8,6 +8,10 @@ module SolidusBankTransfer
 
     config.autoload_paths += %W(#{config.root}/lib)
 
+    initializer :assets do |config|
+      Rails.application.config.assets.precompile += %w( payment_details.png )
+    end
+
     # use rspec for tests
     config.generators do |g|
       g.test_framework :rspec
