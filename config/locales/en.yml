@@ -1,5 +1,8 @@
 en:
   spree:
+    admin:
+        tab:
+            banks: Banks
     account_no: Account No
     add_details: Add details
     additional_details: Additional Details
