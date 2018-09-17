@@ -1,4 +1,5 @@
-<% if bank_transfer_payment = @order.payments.from_bank_transfer.first %>
+<% bank_transfer_payment = @order.payments.from_bank_transfer.first %>
+<% if bank_transfer_payment && ['checkout', 'invalid'].exclude?(bank_transfer_payment.state) %>
   <% unless bank_transfer_payment.details_submitted? %>
     <br>
     <%= link_to Spree.t(:add_details), "javascript:void(0);", class: 'button add_bt_details' %>
